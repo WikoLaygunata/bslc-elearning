@@ -1,5 +1,5 @@
-// const BASE_URL = 'https://api.cms.bslc.or.id/api/public'
-const BASE_URL = 'http://localhost:8000/api/public'
+const BASE_URL = 'https://api.cms.bslc.or.id/api/public'
+// const BASE_URL = 'http://localhost:8000/api/public'
 
 async function parseList(res) {
   const data = await res.json()
