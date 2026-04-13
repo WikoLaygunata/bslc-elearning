@@ -122,3 +122,8 @@ export async function getLatestForumPosts(options = {}) {
   const res = await fetch(`${BASE_URL}/forum-posts/latest?${qs}`)
   return parsePaginated(res)
 }
+
+export async function getHome(){
+  const res = await fetch(`${BASE_URL}/e-learning-home`)
+  return res
+}

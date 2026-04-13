@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
-import { getLatestCourseModules, getLatestVideos } from '@/api/api'
+import { getHome } from '@/api/api'
 
 const latestModules = ref([])
 const latestVideos = ref([])
@@ -12,37 +12,19 @@ const errorVideos = ref('')
 
 onMounted(async () => {
   try {
-    const { items } = await getLatestCourseModules({ page: 1, pageSize: 12 })
-    latestModules.value = items
+    const res = await getHome()
+    const items = await res.json()
+    latestModules.value = items.latest_course_modules
+    latestVideos.value = items.latest_videos
   } catch (e) {
     errorModules.value = 'Gagal memuat modul.'
     console.error(e)
   } finally {
     loadingModules.value = false
-  }
-
-  try {
-    const { items } = await getLatestVideos({ page: 1, pageSize: 12 })
-    latestVideos.value = items
-  } catch (e) {
-    errorVideos.value = 'Gagal memuat video.'
-    console.error(e)
-  } finally {
     loadingVideos.value = false
   }
 })
 
-function courseLabel(mod) {
-  return mod.course?.name ?? '—'
-}
-
-function facultyChain(mod) {
-  const f = mod.course?.major?.faculty?.name
-  const m = mod.course?.major?.name
-  if (f && m) return `${f} · ${m}`
-  if (m) return m
-  return ''
-}
 </script>
 
 <template>
@@ -136,7 +118,7 @@ function facultyChain(mod) {
           </div>
           <RouterLink
             :to="{ name: 'module' }"
-            class="inline-flex w-fit items-center rounded-lg border border-bslc-green bg-bslc-green px-4 py-2 text-sm font-semibold text-white transition hover:bg-bslc-green-dark"
+            class="inline-flex w-fit items-center rounded-lg border border-bslc-green bg-bslc-green px-4 py-2 text-sm font-semibold text-bslc-white! transition hover:bg-bslc-green-dark hover:text-bslc-white! focus:text-bslc-white!"
           >
             See more
           </RouterLink>
@@ -149,7 +131,7 @@ function facultyChain(mod) {
         </p>
         <ul
           v-else
-          class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4"
         >
           <li
             v-for="mod in latestModules"
@@ -163,10 +145,10 @@ function facultyChain(mod) {
               {{ mod.title }}
             </h3>
             <p class="mt-1 text-sm font-medium text-bslc-muted">
-              {{ courseLabel(mod) }}
+              {{ mod.course?.name ?? '—' }}
             </p>
-            <p v-if="facultyChain(mod)" class="mt-0.5 line-clamp-1 text-xs text-bslc-muted">
-              {{ facultyChain(mod) }}
+            <p class="mt-0.5 line-clamp-1 text-xs text-bslc-muted">
+              {{ mod.course?.major?.name ?? '—' }}
             </p>
             <p v-if="mod.description" class="mt-2 line-clamp-2 text-xs text-bslc-muted">
               {{ mod.description }}
@@ -195,7 +177,7 @@ function facultyChain(mod) {
           </div>
           <RouterLink
             :to="{ name: 'video' }"
-            class="inline-flex w-fit items-center rounded-lg border border-bslc-green bg-bslc-green px-4 py-2 text-sm font-semibold text-white transition hover:bg-bslc-green-dark"
+            class="inline-flex w-fit items-center rounded-lg border border-bslc-green bg-bslc-green px-4 py-2 text-sm font-semibold text-bslc-white! transition hover:bg-bslc-green-dark hover:text-bslc-white! focus:text-bslc-white!"
           >
             See more
           </RouterLink>
@@ -208,7 +190,7 @@ function facultyChain(mod) {
         </p>
         <ul
           v-else
-          class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4"
         >
           <li
             v-for="vid in latestVideos"
