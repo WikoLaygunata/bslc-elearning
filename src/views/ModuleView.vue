@@ -272,9 +272,9 @@ onBeforeUnmount(() => {
             :href="mod.link"
             target="_blank"
             rel="noopener noreferrer"
-            class="mt-3 inline-flex text-sm font-semibold text-bslc-green underline-offset-2 hover:underline"
+            class="mt-3 inline-flex w-full justify-center text-sm font-semibold text-bslc-green underline-offset-2 hover:underline px-3 py-2 border border-bslc-cream rounded-lg bg-linear-to-b from-bslc-cream/20 to-bslc-white"
           >
-            Buka modul
+            Buka Modul
           </a>
         </li>
       </ul>

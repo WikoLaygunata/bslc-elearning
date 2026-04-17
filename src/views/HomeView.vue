@@ -153,15 +153,15 @@ onMounted(async () => {
             <p v-if="mod.description" class="mt-2 line-clamp-2 text-xs text-bslc-muted">
               {{ mod.description }}
             </p>
-            <a
-              v-if="mod.link"
-              :href="mod.link"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="mt-3 text-sm font-semibold text-bslc-green underline-offset-2 hover:underline"
-            >
-              Buka modul
-            </a>
+              <a
+                v-if="mod.link"
+                :href="mod.link"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-3 inline-flex text-sm font-semibold w-full justify-center text-bslc-green underline-offset-2 hover:underline px-3 py-2 border border-bslc-cream rounded-lg bg-linear-to-b from-bslc-cream/20 to-bslc-white"
+              >
+                Buka Modul
+              </a>
           </li>
         </ul>
       </div>
@@ -211,9 +211,9 @@ onMounted(async () => {
               :href="vid.link"
               target="_blank"
               rel="noopener noreferrer"
-              class="mt-3 text-sm font-semibold text-bslc-green underline-offset-2 hover:underline"
+              class="mt-3 inline-flex text-sm font-semibold w-full justify-center text-bslc-green underline-offset-2 hover:underline px-3 py-2 border border-bslc-cream rounded-lg bg-linear-to-b from-bslc-cream/20 to-bslc-white"
             >
-              Tonton video
+              Tonton Video
             </a>
           </li>
         </ul>

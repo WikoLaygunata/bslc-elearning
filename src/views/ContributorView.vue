@@ -23,7 +23,7 @@ function getInitials(name) {
 function formatImagePath(path) {
   if (!path) return ''
   if (/^https?:\/\//i.test(path)) return path
-  return `http://localhost:8000/api/storage/${path.startsWith('/') ? '' : '/'}${path}`
+  return `http://localhost:8000/storage/${path.startsWith('/') ? '' : '/'}${path}`
 }
 
 onMounted(async () => {
@@ -67,6 +67,7 @@ onMounted(async () => {
               :src="formatImagePath(item.image_path)"
               :alt="item.name"
               class="h-full w-full object-cover"
+              loading="lazy"
             />
             <div v-else class="flex h-full w-full items-center justify-center text-sm font-bold text-bslc-green">
               {{ getInitials(item.name) }}
