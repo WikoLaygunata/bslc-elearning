@@ -1,5 +1,5 @@
-// const BASE_URL = 'https://api.cms.bslc.or.id/api/public'
-const BASE_URL = 'http://localhost:8000/api/public'
+const BASE_URL = 'https://api.cms.bslc.or.id/api/public'
+// const BASE_URL = 'http://localhost:8000/api/public'
 const CACHE_TTL_MS = 60 * 1000
 const responseCache = new Map()
 
