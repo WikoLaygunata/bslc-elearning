@@ -25,6 +25,16 @@ onMounted(async () => {
   }
 })
 
+function formatDate(value) {
+  if (!value) return '-'
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return '-'
+  return date.toLocaleDateString('id-ID', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  })
+}
 </script>
 
 <template>
@@ -136,7 +146,7 @@ onMounted(async () => {
           <li
             v-for="mod in latestModules"
             :key="mod.id"
-            class="flex flex-col rounded-xl border border-bslc-cream bg-linear-to-b from-bslc-cream/20 to-bslc-white p-4 shadow-sm"
+            class="flex h-full flex-col rounded-xl border border-bslc-cream bg-linear-to-b from-bslc-cream/20 to-bslc-white p-4 shadow-sm"
           >
             <p class="text-xs font-medium uppercase tracking-wide text-bslc-green">
               {{ mod.type ?? 'Module' }}{{ mod.year ? ` · ${mod.year}` : '' }}
@@ -144,21 +154,23 @@ onMounted(async () => {
             <h3 class="mt-1 line-clamp-2 text-base font-semibold text-bslc-ink">
               {{ mod.title }}
             </h3>
+            <div class="mb-3 border-t border-slate-200">
             <p class="mt-1 text-sm font-medium text-bslc-muted">
               {{ mod.course?.name ?? '—' }}
             </p>
-            <p class="mt-0.5 line-clamp-1 text-xs text-bslc-muted">
-              {{ mod.course?.major?.name ?? '—' }}
-            </p>
-            <p v-if="mod.description" class="mt-2 line-clamp-2 text-xs text-bslc-muted">
-              {{ mod.description }}
-            </p>
+              <p class="mt-0.5 line-clamp-1 text-xs text-bslc-muted">
+                {{ mod.course?.major?.name ?? '—' }}
+              </p>
+              <p v-if="mod.description" class="mt-2 line-clamp-2 text-xs text-bslc-muted">
+                {{ mod.description }}
+              </p>
+            </div>
               <a
                 v-if="mod.link"
                 :href="mod.link"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="mt-3 inline-flex text-sm font-semibold w-full justify-center text-bslc-green underline-offset-2 hover:underline px-3 py-2 border border-bslc-cream rounded-lg bg-linear-to-b from-bslc-cream/20 to-bslc-white"
+                class="mt-auto inline-flex w-full justify-center rounded-lg border border-bslc-cream bg-linear-to-b from-bslc-cream/20 to-bslc-white px-3 py-2 pt-3 text-sm font-semibold text-bslc-green underline-offset-2 hover:underline"
               >
                 Buka Modul
               </a>
@@ -195,23 +207,26 @@ onMounted(async () => {
           <li
             v-for="vid in latestVideos"
             :key="vid.id"
-            class="flex flex-col rounded-xl border border-bslc-cream bg-bslc-white p-4 shadow-sm"
+            class="flex h-full flex-col rounded-xl border border-bslc-cream bg-bslc-white p-4 shadow-sm"
           >
-            <p class="text-xs font-medium text-bslc-muted">
-              {{ vid.contributor?.name ?? 'Kontributor' }}{{ vid.year ? ` · ${vid.year}` : '' }}
-            </p>
-            <h3 class="mt-1 line-clamp-2 text-base font-semibold text-bslc-ink">
-              {{ vid.title }}
-            </h3>
-            <p v-if="vid.description" class="mt-2 line-clamp-2 text-xs text-bslc-muted">
-              {{ vid.description }}
-            </p>
+          <div class="flex items-center justify-between gap-2 text-xs font-medium text-bslc-muted">
+            <p class="truncate">{{ vid.contributor?.name ?? 'Kontributor' }}</p>
+            <!-- <p class="shrink-0">{{ formatDate(vid.created_at) }}</p> -->
+          </div>
+            <div class="mb-3 border-t border-slate-200">
+              <h3 class="mt-1 line-clamp-2 text-base font-semibold text-bslc-ink">
+                {{ vid.title }}
+              </h3>
+              <p v-if="vid.description" class="mt-2 line-clamp-2 text-xs text-bslc-muted">
+                {{ vid.description }}
+              </p>
+            </div>
             <a
               v-if="vid.link"
               :href="vid.link"
               target="_blank"
               rel="noopener noreferrer"
-              class="mt-3 inline-flex text-sm font-semibold w-full justify-center text-bslc-green underline-offset-2 hover:underline px-3 py-2 border border-bslc-cream rounded-lg bg-linear-to-b from-bslc-cream/20 to-bslc-white"
+              class="mt-auto inline-flex w-full justify-center rounded-lg border border-bslc-cream bg-linear-to-b from-bslc-cream/20 to-bslc-white px-3 py-2 pt-3 text-sm font-semibold text-bslc-green underline-offset-2 hover:underline"
             >
               Tonton Video
             </a>

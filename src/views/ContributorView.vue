@@ -55,48 +55,41 @@ onMounted(async () => {
       Belum ada data kontributor.
     </p>
 
-    <ul v-else class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      <li
-        v-for="item in sortedContributors"
-        :key="item.id"
-        class="rounded-2xl border border-bslc-cream bg-white p-5 shadow-sm"
-      >
-        <div class="flex items-start gap-4">
-          <div class="h-14 w-14 shrink-0 overflow-hidden rounded-full border border-slate-200 bg-slate-100">
-            <img
-              v-if="item.image_path"
-              :src="formatImagePath(item.image_path)"
-              :alt="item.name"
-              class="h-full w-full object-cover"
-              loading="lazy"
-            />
-            <div v-else class="flex h-full w-full items-center justify-center text-sm font-bold text-bslc-green">
+    <ul v-else class="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4">
+      <li v-for="item in sortedContributors" :key="item.id" class="flex flex-col gap-2.5 rounded-xl border border-bslc-cream bg-white p-3">
+        
+        <!-- Top: avatar + info centered -->
+        <div class="flex flex-col items-center gap-2 text-center">
+          <div class="h-11 w-11 shrink-0 overflow-hidden rounded-full border border-slate-200 bg-slate-100">
+            <img v-if="item.image_path" :src="formatImagePath(item.image_path)" :alt="item.name" class="h-full w-full object-cover" />
+            <div v-else class="flex h-full w-full items-center justify-center text-xs font-medium text-bslc-green">
               {{ getInitials(item.name) }}
             </div>
           </div>
-
-          <div class="min-w-0 flex-1">
-            <h2 class="truncate text-base font-semibold text-bslc-ink">{{ item.name }}</h2>
-            <p class="mt-1 text-sm text-bslc-muted">{{ item.major || '-' }}</p>
-            <p class="text-xs text-slate-500">{{ item.region || '-' }}</p>
+          <div class="w-full min-w-0">
+            <p class="truncate text-[13px] font-medium text-bslc-ink">{{ item.name }}</p>
+            <p class="truncate text-[11px] text-bslc-muted">{{ item.major || '-' }}</p>
+            <p class="truncate text-[10px] text-slate-400">{{ item.region || '-' }}</p>
           </div>
         </div>
 
-        <div class="mt-4 border-t border-slate-200 pt-4">
-          <div class="group relative inline-flex items-center gap-2">
-            <span class="text-xs font-medium uppercase tracking-wide text-slate-500">Contributions</span>
-            <span class="rounded-md bg-bslc-green/10 px-2 py-1 text-sm font-semibold text-bslc-green">
-              {{ item.contributions_count ?? 0 }}
-            </span>
-
-            <div
-              class="pointer-events-none absolute -top-2 left-full z-10 ml-2 w-40 -translate-y-full rounded-lg bg-slate-900 px-3 py-2 text-xs text-white opacity-0 shadow-lg transition group-hover:opacity-100"
-            >
-              <p>Videos: {{ item.videos_count ?? 0 }}</p>
-              <p>Forum posts: {{ item.forum_posts_count ?? 0 }}</p>
+        <!-- Footer: stats + badge -->
+        <div class="flex items-center justify-between border-t border-slate-100 pt-2">
+          <div class="flex gap-2.5">
+            <div class="flex flex-col items-center">
+              <span class="text-[13px] font-medium text-bslc-ink">{{ item.videos_count ?? 0 }}</span>
+              <span class="text-[10px] text-slate-400">Video</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <span class="text-[13px] font-medium text-bslc-ink">{{ item.forum_posts_count ?? 0 }}</span>
+              <span class="text-[10px] text-slate-400">Forum</span>
             </div>
           </div>
+          <span class="rounded-full bg-bslc-green/10 px-2.5 py-0.5 text-xs font-medium text-bslc-green">
+            {{ item.contributions_count ?? 0 }}
+          </span>
         </div>
+
       </li>
     </ul>
   </section>

@@ -254,12 +254,13 @@ onBeforeUnmount(() => {
         <li
           v-for="mod in displayedModules"
           :key="mod.id"
-          class="rounded-xl border border-bslc-cream bg-linear-to-b from-bslc-cream/20 to-bslc-white p-4"
+          class="flex h-full flex-col rounded-xl border border-bslc-cream bg-linear-to-b from-bslc-cream/20 to-bslc-white p-4"
         >
           <p class="text-xs font-medium uppercase tracking-wide text-bslc-green">
             {{ mod.type ?? 'Module' }}{{ mod.year ? ` · ${mod.year}` : '' }}
           </p>
           <h3 class="mt-1 line-clamp-2 text-base font-semibold text-bslc-ink">{{ mod.title }}</h3>
+          <div class="mb-3 border-t border-slate-200">
           <p class="mt-1 text-sm font-medium text-bslc-muted">{{ mod.course?.name ?? '-' }}</p>
           <p class="mt-0.5 line-clamp-1 text-xs text-bslc-muted">
             {{ mod.course?.major?.name ?? '-' }}
@@ -267,12 +268,13 @@ onBeforeUnmount(() => {
           <p v-if="mod.description" class="mt-2 line-clamp-2 text-xs text-bslc-muted">
             {{ mod.description }}
           </p>
+        </div>
           <a
             v-if="mod.link"
             :href="mod.link"
             target="_blank"
             rel="noopener noreferrer"
-            class="mt-3 inline-flex w-full justify-center text-sm font-semibold text-bslc-green underline-offset-2 hover:underline px-3 py-2 border border-bslc-cream rounded-lg bg-linear-to-b from-bslc-cream/20 to-bslc-white"
+            class="mt-auto inline-flex w-full justify-center rounded-lg border border-bslc-cream bg-linear-to-b from-bslc-cream/20 to-bslc-white px-3 py-2 pt-3 text-sm font-semibold text-bslc-green underline-offset-2 hover:underline"
           >
             Buka Modul
           </a>
