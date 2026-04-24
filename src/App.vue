@@ -146,6 +146,12 @@ const socialLinks = [
           </div>
           <!-- Kontak kanan (atau bawah di mobile) -->
           <div class="contact flex flex-col items-center gap-4 mt-8 min-[640px]:mt-0 min-[640px]:items-end min-[640px]:flex-1">
+            <RouterLink
+              to="/form"
+              class="inline-flex items-center rounded-lg border border-white/35 bg-white/10 px-3 py-2 text-xs font-semibold text-white transition hover:bg-white/20 sm:text-sm"
+            >
+              Ikut Berkontribusi Postingan Forum/Video
+            </RouterLink>
             <div class="text">
               <p class="text-center text-sm font-medium text-white/95 min-[640px]:text-right">Contact us on</p>
             </div>

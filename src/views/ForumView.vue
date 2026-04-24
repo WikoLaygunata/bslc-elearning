@@ -120,7 +120,10 @@ onBeforeUnmount(() => {
   <section class="mx-auto max-w-4xl px-4 py-10 sm:px-6">
     <div class="mb-6">
       <h1 class="text-3xl font-bold tracking-tight text-bslc-ink md:text-4xl">Forum</h1>
-      <p class="mt-1 text-sm text-bslc-muted">Forum informasi mengenai pembelajaran, contact tim BSLC untuk berkontribusi</p>
+      <p class="mt-1 text-sm text-bslc-muted">Forum informasi mengenai pembelajaran, contact tim BSLC atau 
+        <span class="text-bslc-green underline">
+          <RouterLink to="/form" class="text-bslc-green underline">klik link ini</RouterLink>
+        </span> untuk berkontribusi</p>
     </div>
 
     <div class="mb-5 rounded-xl border border-slate-200 bg-white p-3 shadow-sm sm:p-4">
