@@ -27,6 +27,12 @@ function formatImagePath(path) {
   return `https://api.cms.bslc.or.id/storage/${path.startsWith('/') ? '' : '/'}${path}`
 }
 
+function getBatchBadge(nim) {
+  const digits = String(nim ?? '').replace(/\D/g, '')
+  if (digits.length < 2) return ''
+  return `B${digits.slice(0, 2)}`
+}
+
 onMounted(async () => {
   loading.value = true
   errorMessage.value = ''
@@ -56,7 +62,13 @@ onMounted(async () => {
     </p>
 
     <ul v-else class="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4">
-      <li v-for="item in sortedContributors" :key="item.id" class="flex flex-col gap-2.5 rounded-xl border border-bslc-cream bg-white p-3">
+      <li v-for="item in sortedContributors" :key="item.id" class="relative flex flex-col gap-2.5 rounded-xl border border-bslc-cream bg-white p-3">
+        <span
+          v-if="getBatchBadge(item.nim)"
+          class="absolute left-2 top-2 rounded-full border border-bslc-green/20 bg-bslc-green/10 px-2 py-0.5 text-[10px] font-semibold tracking-wide text-bslc-green"
+        >
+          {{ getBatchBadge(item.nim) }}
+        </span>
         
         <!-- Top: avatar + info centered -->
         <div class="flex flex-col items-center gap-2 text-center">
