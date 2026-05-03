@@ -1,6 +1,7 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { getFaculties, getLatestForumPosts } from '@/api/api'
+import { ensureExternalUrl } from '@/utils/url'
 
 const PAGE_SIZE = 10
 const SEARCH_DEBOUNCE_MS = 400
@@ -219,8 +220,8 @@ onBeforeUnmount(() => {
         <p v-if="post.description" class="mt-2 whitespace-pre-line text-sm leading-relaxed text-slate-700">
           {{ post.description }}
         </p>
-          <a v-if="post.link" :href="post.link" target="_blank" rel="noopener noreferrer" class="mt-2 inline-flex text-sm font-semibold text-bslc-green underline-offset-2 hover:underline px-3 py-2 border border-bslc-cream rounded-lg bg-linear-to-b from-bslc-cream/20 to-bslc-white">
-            {{ post.link }}
+          <a v-if="post.link" :href="ensureExternalUrl(post.link)" :title="post.link" target="_blank" rel="noopener noreferrer" class="mt-2 inline-flex text-sm font-semibold text-bslc-green underline-offset-2 hover:underline px-3 py-2 border border-bslc-cream rounded-lg bg-linear-to-b from-bslc-cream/20 to-bslc-white">
+            Buka Link
           </a>
       </article>
     </div>

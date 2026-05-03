@@ -1,6 +1,7 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { getFaculties, getLatestVideos } from '@/api/api'
+import { ensureExternalUrl } from '@/utils/url'
 
 const PAGE_SIZE = 10
 const SEARCH_DEBOUNCE_MS = 400
@@ -184,7 +185,7 @@ onBeforeUnmount(() => {
           </div>
           <a
             v-if="vid.link"
-            :href="vid.link"
+            :href="ensureExternalUrl(vid.link)"
             target="_blank"
             rel="noopener noreferrer"
             class="mt-auto inline-flex w-full justify-center rounded-lg border border-bslc-cream bg-linear-to-b from-bslc-cream/20 to-bslc-white px-3 py-2 pt-3 text-sm font-semibold text-bslc-green underline-offset-2 hover:underline"

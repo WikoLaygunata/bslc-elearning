@@ -6,6 +6,7 @@ import {
   getLatestCourseModules,
   getMajors,
 } from '@/api/api'
+import { ensureExternalUrl } from '@/utils/url'
 
 const PAGE_SIZE = 10
 
@@ -271,7 +272,7 @@ onBeforeUnmount(() => {
         </div>
           <a
             v-if="mod.link"
-            :href="mod.link"
+            :href="ensureExternalUrl(mod.link)"
             target="_blank"
             rel="noopener noreferrer"
             class="mt-auto inline-flex w-full justify-center rounded-lg border border-bslc-cream bg-linear-to-b from-bslc-cream/20 to-bslc-white px-3 py-2 pt-3 text-sm font-semibold text-bslc-green underline-offset-2 hover:underline"

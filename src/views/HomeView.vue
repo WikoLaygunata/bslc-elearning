@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import { getHome } from '@/api/api'
+import { ensureExternalUrl } from '@/utils/url'
 
 const latestModules = ref([])
 const latestVideos = ref([])
@@ -167,7 +168,7 @@ function formatDate(value) {
             </div>
               <a
                 v-if="mod.link"
-                :href="mod.link"
+                :href="ensureExternalUrl(mod.link)"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="mt-auto inline-flex w-full justify-center rounded-lg border border-bslc-cream bg-linear-to-b from-bslc-cream/20 to-bslc-white px-3 py-2 pt-3 text-sm font-semibold text-bslc-green underline-offset-2 hover:underline"
@@ -223,7 +224,7 @@ function formatDate(value) {
             </div>
             <a
               v-if="vid.link"
-              :href="vid.link"
+              :href="ensureExternalUrl(vid.link)"
               target="_blank"
               rel="noopener noreferrer"
               class="mt-auto inline-flex w-full justify-center rounded-lg border border-bslc-cream bg-linear-to-b from-bslc-cream/20 to-bslc-white px-3 py-2 pt-3 text-sm font-semibold text-bslc-green underline-offset-2 hover:underline"
@@ -232,6 +233,115 @@ function formatDate(value) {
             </a>
           </li>
         </ul>
+      </div>
+    </section>
+
+    <!-- Contribution CTA -->
+    <section class="border-t border-bslc-cream/80 bg-bslc-white py-12 md:py-14">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div
+          class="rounded-2xl border border-bslc-cream bg-linear-to-r from-bslc-cream/20 via-bslc-white to-bslc-cream/10 p-6 shadow-sm md:p-8"
+        >
+          <div class="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+            <div class="max-w-2xl">
+              <h2 class="text-2xl font-bold text-bslc-ink md:text-3xl">
+                Punya materi yang bermanfaat?
+              </h2>
+              <p class="mt-2 text-sm leading-relaxed text-bslc-muted md:text-base">
+                Mahasiswa BINUS bisa ikut berkontribusi dengan mengirimkan modul atau video
+                pembelajaran. Yuk bantu teman-teman belajar lewat konten terbaikmu.
+              </p>
+            </div>
+            <RouterLink
+              to="/form"
+              class="inline-flex w-fit items-center justify-center rounded-lg border border-bslc-green bg-bslc-green px-5 py-2.5 text-sm font-semibold text-bslc-white! transition hover:bg-bslc-green-dark hover:text-bslc-white! focus:text-bslc-white!"
+            >
+              Isi Form Kontribusi
+            </RouterLink>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="border-t border-bslc-cream/80 bg-linear-to-b from-bslc-cream/10 to-bslc-white py-12 md:py-14">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold text-bslc-ink md:text-3xl">FAQ E-Learning BSLC</h2>
+          <p class="mt-1 text-sm text-bslc-muted">
+            Penjelasan singkat mengenai platform pembelajaran E-Learning BSLC.
+          </p>
+        </div>
+
+        <div class="grid gap-4 md:grid-cols-2">
+          <article class="rounded-xl border border-bslc-cream bg-bslc-white p-5 shadow-sm">
+            <h3 class="text-base font-semibold text-bslc-ink">
+              Apa itu E-Learning BSLC?
+            </h3>
+            <p class="mt-2 text-sm leading-relaxed text-bslc-muted">
+              E-Learning BSLC adalah platform belajar gratis berisi modul dan video untuk
+              membantu mahasiswa BINUS memperdalam materi akademik maupun skill praktikal.
+            </p>
+          </article>
+
+          <article class="rounded-xl border border-bslc-cream bg-bslc-white p-5 shadow-sm">
+            <h3 class="text-base font-semibold text-bslc-ink">
+              Siapa saja yang bisa mengakses kontennya?
+            </h3>
+            <p class="mt-2 text-sm leading-relaxed text-bslc-muted">
+              Seluruh Binusian dapat mengakses konten yang tersedia. Platform ini dirancang
+              agar pembelajaran bisa dilakukan kapan saja dan dari mana saja.
+            </p>
+          </article>
+
+          <article class="rounded-xl border border-bslc-cream bg-bslc-white p-5 shadow-sm">
+            <h3 class="text-base font-semibold text-bslc-ink">
+              Konten apa saja yang tersedia?
+            </h3>
+            <p class="mt-2 text-sm leading-relaxed text-bslc-muted">
+              Kamu bisa menemukan modul pembelajaran terstruktur dan video dari kontributor
+              mahasiswa untuk berbagai jurusan serta topik yang relevan.
+            </p>
+          </article>
+
+          <article class="rounded-xl border border-bslc-cream bg-bslc-white p-5 shadow-sm">
+            <h3 class="text-base font-semibold text-bslc-ink">
+              Bagaimana cara ikut berkontribusi?
+            </h3>
+            <p class="mt-2 text-sm leading-relaxed text-bslc-muted">
+              Klik tombol form kontribusi, isi data yang dibutuhkan, lalu kirim materi terbaikmu.
+              Tim BSLC akan melakukan review sebelum konten dipublikasikan.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Vision -->
+    <section class="relative overflow-hidden border-t border-bslc-cream/80 bg-bslc-white py-20 md:py-24">
+      <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div class="absolute -left-20 top-10 h-56 w-56 rounded-full bg-bslc-green/10 blur-3xl"></div>
+        <div class="absolute -right-16 bottom-6 h-64 w-64 rounded-full bg-bslc-cream blur-3xl"></div>
+        <div class="absolute left-1/2 top-1/3 h-40 w-40 -translate-x-1/2 rounded-full bg-bslc-green/8 blur-2xl"></div>
+      </div>
+      <div class="relative mx-auto max-w-5xl px-4 text-center sm:px-6">
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-bslc-green">Our Vision</p>
+        <h2 class="mt-4 text-lg font-bold leading-tight text-bslc-ink md:text-2xl">
+          Menjadi komunitas belajar yang unggul dan kolaboratif untuk menghasilkan generasi
+          berprestasi melalui pengembangan akademik, keterampilan, dan kepemimpinan yang berdampak
+          bagi masyarakat.
+        </h2>
+        <div class="mt-8">
+          <a
+            href="https://bslc.or.id"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center rounded-lg border border-bslc-green bg-bslc-green px-6 py-2.5 text-sm font-semibold text-bslc-white! transition hover:bg-bslc-green-dark hover:text-bslc-white! focus:text-bslc-white!"
+          >
+            Visit our main page
+          </a>
+        </div>
       </div>
     </section>
   </div>
