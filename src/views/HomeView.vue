@@ -40,7 +40,14 @@ function formatDate(value) {
 
 <template>
   <div class="container-home bg-linear-to-b from-bslc-cream/35 via-bslc-white to-bslc-white">
-    <section class="home-top mx-auto flex max-w-6xl flex-col items-center gap-8 px-4 pb-10 pt-8 md:gap-10 md:pb-12 md:pt-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:px-6 lg:pb-16 lg:pt-14">
+    <section class="home-top relative overflow-hidden">
+      <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div class="absolute -left-16 top-8 h-44 w-44 rounded-full bg-bslc-green/10 blur-3xl"></div>
+        <div class="absolute -right-16 top-0 h-56 w-56 rounded-full bg-bslc-cream/70 blur-3xl"></div>
+        <div class="absolute bottom-0 left-1/3 h-36 w-36 rounded-full bg-bslc-green/8 blur-2xl"></div>
+        <div class="absolute right-1/4 top-1/2 h-28 w-28 -translate-y-1/2 rounded-full bg-bslc-green/8 blur-2xl"></div>
+      </div>
+      <div class="relative z-10 mx-auto flex max-w-6xl flex-col items-center gap-8 px-4 pb-10 pt-8 md:gap-10 md:pb-12 md:pt-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:px-6 lg:pb-16 lg:pt-14">
       <div class="title-right-home w-full max-w-xl space-y-6 md:space-y-8 lg:max-w-none lg:flex-1">
         <div class="space-y-2 md:space-y-3">
           <p
@@ -57,9 +64,10 @@ function formatDate(value) {
         </div>
 
         <div class="title-linear w-full max-w-lg">
-          <div
-            class="container-linear flex divide-x divide-bslc-cream overflow-hidden rounded-lg border border-bslc-cream bg-bslc-white shadow-sm"
-          >
+          <div class="rounded-lg bg-linear-to-r from-bslc-green/80 via-bslc-green to-emerald-400 p-px shadow-sm">
+            <div
+              class="container-linear flex divide-x divide-bslc-cream overflow-hidden rounded-[calc(var(--radius-lg)-1px)] bg-bslc-white"
+            >
             <div
               class="linear-left flex flex-1 flex-col items-center justify-center py-3.5 md:py-4 lg:py-5"
             >
@@ -102,20 +110,22 @@ function formatDate(value) {
                 MAJORS
               </p>
             </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div
-        class="title-left flex w-full shrink-0 justify-center lg:w-auto lg:max-w-md lg:justify-end xl:max-w-lg"
-      >
-        <img
-          class="img-home h-auto w-full max-w-[280px] md:max-w-xs lg:max-w-none"
-          src="/Image-Home.svg"
-          alt=""
-          width="467"
-          height="468"
-        />
+        <div
+          class="title-left flex w-full shrink-0 justify-center lg:w-auto lg:max-w-md lg:justify-end xl:max-w-lg"
+        >
+          <img
+            class="img-home h-auto w-full max-w-[280px] md:max-w-xs lg:max-w-none"
+            src="/Image-Home.svg"
+            alt=""
+            width="467"
+            height="468"
+          />
+        </div>
       </div>
     </section>
 
@@ -339,7 +349,7 @@ function formatDate(value) {
             rel="noopener noreferrer"
             class="inline-flex items-center justify-center rounded-lg border border-bslc-green bg-bslc-green px-6 py-2.5 text-sm font-semibold text-bslc-white! transition hover:bg-bslc-green-dark hover:text-bslc-white! focus:text-bslc-white!"
           >
-            Visit our main page
+            Visit our main website
           </a>
         </div>
       </div>
