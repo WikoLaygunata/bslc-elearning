@@ -163,7 +163,7 @@ onBeforeUnmount(() => {
       <input
         v-model="search"
         type="text"
-        placeholder="Cari judul video atau kontributor..."
+        placeholder="Cari judul post atau kontributor..."
         class="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 outline-none transition-all focus:border-[#19A89D] focus:ring-2 focus:ring-[#19A89D] sm:w-80"
       />
     </div>

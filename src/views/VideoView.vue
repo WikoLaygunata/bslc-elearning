@@ -151,7 +151,7 @@ onBeforeUnmount(() => {
       <p v-else-if="errorMessage" class="text-sm text-red-700">{{ errorMessage }}</p>
       <p v-else-if="videos.length === 0" class="text-sm text-bslc-muted">Belum ada video.</p>
 
-      <ul v-else class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+      <ul v-else class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 mt-3">
         <li
           v-for="vid in videos"
           :key="vid.id"
