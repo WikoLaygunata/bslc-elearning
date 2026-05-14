@@ -5,8 +5,8 @@ const links = [
   { to: '/', label: 'Home' },
   { to: '/module', label: 'Module' },
   { to: '/video', label: 'Video' },
-  { to: '/contributor', label: 'Contributor' },
   { to: '/forum', label: 'Forum' },
+  { to: '/contributor', label: 'Contributor' },
 ]
 
 const year = new Date().getFullYear()

@@ -127,10 +127,14 @@ export async function getLatestCourseModules(options = {}) {
   return parsePaginated(data)
 }
 
-/** GET /contributors — active contributors + contributions_count */
-export async function getContributors() {
-  const data = await fetchJson(`${BASE_URL}/contributors`)
-  return parseList(data)
+/**
+ * GET /contributors — paginated active contributors + total_contributions
+ * @param {{ page?: number, pageSize?: number }} options
+ */
+export async function getContributors(options = {}) {
+  const qs = paginationQuery(options)
+  const data = await fetchJson(`${BASE_URL}/contributors?${qs}`)
+  return parsePaginated(data)
 }
 
 /**

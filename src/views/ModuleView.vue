@@ -44,6 +44,28 @@ const totalPages = computed(() => {
   return Math.max(1, latestMeta.value.lastPage || 1)
 })
 
+const paginationItems = computed(() => {
+  const lastPage = totalPages.value
+  const current = currentPage.value
+
+  if (lastPage <= 7) return Array.from({ length: lastPage }, (_, index) => index + 1)
+
+  const pages = new Set([1, lastPage, current, current - 1, current + 1])
+  const sortedPages = [...pages]
+    .filter((item) => item >= 1 && item <= lastPage)
+    .sort((a, b) => a - b)
+  const items = []
+
+  sortedPages.forEach((item, index) => {
+    if (index > 0 && item - sortedPages[index - 1] > 1) {
+      items.push(`ellipsis-${item}`)
+    }
+    items.push(item)
+  })
+
+  return items
+})
+
 const pageInfo = computed(() => {
   if (totalItems.value === 0) return 'Tidak ada data.'
   const from = (currentPage.value - 1) * PAGE_SIZE + 1
@@ -282,26 +304,45 @@ onBeforeUnmount(() => {
         </li>
       </ul>
 
-      <div class="mt-6 flex justify-end border-t border-slate-200 pt-4">
-        <div class="flex items-center gap-2">
-          <span class="text-sm text-slate-600">Page {{ currentPage }} / {{ totalPages }}</span>
-          <button
-            type="button"
-            class="rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50"
-            :disabled="currentPage <= 1 || loadingModules"
-            @click="goToPage(currentPage - 1)"
+      <div class="mt-6 flex items-center justify-end gap-2 border-t border-slate-200 pt-4">
+        <button
+          type="button"
+          class="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white font-bold text-slate-700 shadow-sm transition hover:border-bslc-green hover:text-bslc-green disabled:cursor-not-allowed disabled:opacity-40"
+          :disabled="currentPage <= 1 || loadingModules"
+          @click="goToPage(currentPage - 1)"
+        >
+          &lt;
+        </button>
+        <template v-for="item in paginationItems" :key="item">
+          <span
+            v-if="typeof item === 'string'"
+            class="flex h-10 w-10 items-center justify-center text-sm font-semibold text-slate-400"
           >
-            <p>&lt;</p>
-          </button>
+            ...
+          </span>
           <button
+            v-else
             type="button"
-            class="rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50"
-            :disabled="currentPage >= totalPages || loadingModules"
-            @click="goToPage(currentPage + 1)"
+            class="flex h-10 w-10 items-center justify-center rounded-full border font-bold shadow-sm transition"
+            :class="
+              currentPage === item
+                ? 'border-bslc-green bg-bslc-green text-white shadow-bslc-green/20'
+                : 'border-slate-200 bg-white text-slate-700 hover:border-bslc-green hover:text-bslc-green'
+            "
+            :disabled="loadingModules"
+            @click="goToPage(item)"
           >
-            <p>&gt;</p>
+            {{ item }}
           </button>
-        </div>
+        </template>
+        <button
+          type="button"
+          class="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white font-bold text-slate-700 shadow-sm transition hover:border-bslc-green hover:text-bslc-green disabled:cursor-not-allowed disabled:opacity-40"
+          :disabled="currentPage >= totalPages || loadingModules"
+          @click="goToPage(currentPage + 1)"
+        >
+          &gt;
+        </button>
       </div>
   </section>
 </template>
