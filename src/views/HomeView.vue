@@ -145,7 +145,14 @@ function formatDate(value) {
           </RouterLink>
         </div>
 
-        <p v-if="loadingModules" class="text-sm text-bslc-muted">Memuat modul…</p>
+        <ul v-if="loadingModules" class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+          <li v-for="i in 4" :key="i" class="flex h-full min-h-[160px] flex-col rounded-2xl border border-bslc-cream/50 bg-white/60 p-5 shadow-sm">
+            <div class="mb-3 h-3 w-20 animate-pulse rounded-full bg-slate-200"></div>
+            <div class="mb-2 h-5 w-3/4 animate-pulse rounded-md bg-slate-200"></div>
+            <div class="mb-4 h-4 w-1/2 animate-pulse rounded-md bg-slate-200"></div>
+            <div class="mt-auto h-10 w-full animate-pulse rounded-xl bg-slate-200"></div>
+          </li>
+        </ul>
         <p v-else-if="errorModules" class="text-sm text-red-700">{{ errorModules }}</p>
         <p v-else-if="latestModules.length === 0" class="text-sm text-bslc-muted">
           Belum ada modul.
@@ -206,7 +213,17 @@ function formatDate(value) {
           </RouterLink>
         </div>
 
-        <p v-if="loadingVideos" class="text-sm text-bslc-muted">Memuat video…</p>
+        <ul v-if="loadingVideos" class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+          <li v-for="i in 4" :key="i" class="flex h-full min-h-[150px] flex-col rounded-2xl border border-bslc-cream/50 bg-white/60 p-5 shadow-sm">
+            <div class="mb-3 flex items-center justify-between">
+              <div class="h-3 w-20 animate-pulse rounded-full bg-slate-200"></div>
+              <div class="h-3 w-16 animate-pulse rounded-full bg-slate-200"></div>
+            </div>
+            <div class="mb-2 h-5 w-full animate-pulse rounded-md bg-slate-200"></div>
+            <div class="mb-4 h-4 w-2/3 animate-pulse rounded-md bg-slate-200"></div>
+            <div class="mt-auto h-10 w-full animate-pulse rounded-xl bg-slate-200"></div>
+          </li>
+        </ul>
         <p v-else-if="errorVideos" class="text-sm text-red-700">{{ errorVideos }}</p>
         <p v-else-if="latestVideos.length === 0" class="text-sm text-bslc-muted">
           Belum ada video.

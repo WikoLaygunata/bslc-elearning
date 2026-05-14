@@ -265,7 +265,14 @@ onBeforeUnmount(() => {
         />
       </div>
 
-      <p v-if="loadingModules" class="text-sm text-bslc-muted">Memuat modul...</p>
+      <ul v-if="loadingModules" class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+        <li v-for="i in 8" :key="i" class="flex h-full min-h-[160px] flex-col rounded-2xl border border-bslc-cream/50 bg-white/60 p-5 shadow-sm">
+          <div class="mb-3 h-3 w-20 animate-pulse rounded-full bg-slate-200"></div>
+          <div class="mb-2 h-5 w-3/4 animate-pulse rounded-md bg-slate-200"></div>
+          <div class="mb-4 h-4 w-1/2 animate-pulse rounded-md bg-slate-200"></div>
+          <div class="mt-auto h-10 w-full animate-pulse rounded-xl bg-slate-200"></div>
+        </li>
+      </ul>
       <p v-else-if="errorMessage" class="text-sm text-red-700">{{ errorMessage }}</p>
       <p v-else-if="displayedModules.length === 0" class="text-sm text-bslc-muted">Belum ada modul.</p>
 

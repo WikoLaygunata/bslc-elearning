@@ -167,7 +167,17 @@ onBeforeUnmount(() => {
         class="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 outline-none transition-all focus:border-[#19A89D] focus:ring-2 focus:ring-[#19A89D] sm:w-80"
       />
     </div>
-      <p v-if="loading" class="text-sm text-bslc-muted">Memuat video...</p>
+      <ul v-if="loading" class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 mt-3">
+        <li v-for="i in 8" :key="i" class="flex h-full min-h-[160px] flex-col rounded-2xl border border-bslc-cream/50 bg-white/60 p-5 shadow-sm">
+          <div class="mb-3 flex items-center justify-between">
+            <div class="h-3 w-20 animate-pulse rounded-full bg-slate-200"></div>
+            <div class="h-3 w-16 animate-pulse rounded-full bg-slate-200"></div>
+          </div>
+          <div class="mb-2 h-5 w-full animate-pulse rounded-md bg-slate-200"></div>
+          <div class="mb-4 h-4 w-2/3 animate-pulse rounded-md bg-slate-200"></div>
+          <div class="mt-auto h-10 w-full animate-pulse rounded-xl bg-slate-200"></div>
+        </li>
+      </ul>
       <p v-else-if="errorMessage" class="text-sm text-red-700">{{ errorMessage }}</p>
       <p v-else-if="videos.length === 0" class="text-sm text-bslc-muted">Belum ada video.</p>
 

@@ -99,7 +99,25 @@ onMounted(async () => {
       <p class="mt-1 text-sm text-bslc-muted">List volunteer beserta total kontribusi</p>
     </div>
 
-    <p v-if="loading" class="text-sm text-bslc-muted">Memuat data kontributor...</p>
+    <ul v-if="loading" class="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4 mt-3">
+      <li v-for="i in 8" :key="i" class="relative flex flex-col overflow-hidden rounded-2xl border border-bslc-cream/50 bg-white/60 shadow-sm">
+        <div class="absolute inset-x-0 top-0 h-14 animate-pulse bg-slate-200"></div>
+        <div class="relative z-10 mt-5 flex flex-col items-center gap-2 px-4 text-center">
+          <div class="h-16 w-16 shrink-0 animate-pulse rounded-full border-4 border-white bg-slate-300"></div>
+          <div class="mt-1 flex w-full flex-col items-center gap-1.5">
+            <div class="h-4 w-3/4 animate-pulse rounded bg-slate-200"></div>
+            <div class="h-3 w-1/2 animate-pulse rounded bg-slate-200"></div>
+          </div>
+        </div>
+        <div class="mt-4 flex items-center justify-between border-t border-slate-100/60 bg-white/40 px-5 py-3">
+          <div class="flex gap-4">
+            <div class="h-8 w-8 animate-pulse rounded bg-slate-200"></div>
+            <div class="h-8 w-8 animate-pulse rounded bg-slate-200"></div>
+          </div>
+          <div class="h-6 w-10 animate-pulse rounded bg-slate-200"></div>
+        </div>
+      </li>
+    </ul>
     <p v-else-if="errorMessage" class="text-sm text-red-700">{{ errorMessage }}</p>
     <p v-else-if="contributors.length === 0" class="text-sm text-bslc-muted">
       Belum ada data kontributor.

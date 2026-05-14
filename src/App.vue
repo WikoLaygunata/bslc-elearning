@@ -130,7 +130,11 @@ const socialLinks = [
     </header>
 
     <main class="flex-1">
-      <RouterView />
+      <RouterView v-slot="{ Component }">
+        <transition name="fade" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </RouterView>
     </main>
 
     <footer class="bg-bslc-footer-outer text-white">

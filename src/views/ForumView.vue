@@ -188,7 +188,22 @@ onBeforeUnmount(() => {
       />
     </div>
 
-    <p v-if="loading" class="text-sm text-bslc-muted">Memuat post forum...</p>
+    <div v-if="loading" class="space-y-4 mt-3">
+      <div v-for="i in 4" :key="i" class="rounded-2xl border border-bslc-cream/50 bg-white/60 p-6 shadow-sm">
+        <div class="mb-4 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+          <div class="flex items-center gap-3">
+            <div class="h-10 w-10 shrink-0 animate-pulse rounded-full bg-slate-200"></div>
+            <div class="flex flex-col gap-1.5">
+              <div class="h-4 w-32 animate-pulse rounded bg-slate-200"></div>
+              <div class="h-3 w-20 animate-pulse rounded bg-slate-200"></div>
+            </div>
+          </div>
+        </div>
+        <div class="mb-2 h-6 w-3/4 animate-pulse rounded bg-slate-200"></div>
+        <div class="h-4 w-full animate-pulse rounded bg-slate-200"></div>
+        <div class="mt-4 h-10 w-28 animate-pulse rounded-xl bg-slate-200"></div>
+      </div>
+    </div>
     <p v-else-if="errorMessage" class="text-sm text-red-700">{{ errorMessage }}</p>
     <p v-else-if="posts.length === 0" class="text-sm text-bslc-muted">Belum ada post forum.</p>
 

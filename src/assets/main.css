@@ -45,7 +45,7 @@
 
   --animate-blob: blob 7s infinite;
   --animate-blob-slow: blob 10s infinite;
-  --animate-float: float 6s ease-in-out infinite;
+  --animate-float: float 10s ease-in-out infinite;
 }
 
 @keyframes blob {
@@ -114,4 +114,16 @@ a {
 ::selection {
   background-color: rgba(9, 87, 84, 0.2); /* var(--green-color) with opacity */
   color: var(--black-color);
+}
+
+/* Page Transitions */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(6px);
 }
