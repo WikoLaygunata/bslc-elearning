@@ -39,13 +39,13 @@ function formatDate(value) {
 </script>
 
 <template>
-  <div class="container-home bg-linear-to-b from-bslc-cream/35 via-bslc-white to-bslc-white">
+  <div class="container-home bg-white">
     <section class="home-top relative overflow-hidden">
       <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div class="absolute -left-16 top-8 h-44 w-44 rounded-full bg-bslc-green/10 blur-3xl"></div>
-        <div class="absolute -right-16 top-0 h-56 w-56 rounded-full bg-bslc-cream/70 blur-3xl"></div>
-        <div class="absolute bottom-0 left-1/3 h-36 w-36 rounded-full bg-bslc-green/8 blur-2xl"></div>
-        <div class="absolute right-1/4 top-1/2 h-28 w-28 -translate-y-1/2 rounded-full bg-bslc-green/8 blur-2xl"></div>
+        <div class="animate-blob absolute -left-16 top-8 h-44 w-44 rounded-full bg-bslc-green/15 blur-3xl"></div>
+        <div class="animate-blob-slow absolute -right-16 top-0 h-56 w-56 rounded-full bg-bslc-cream/70 blur-3xl"></div>
+        <div class="animate-blob absolute bottom-0 left-1/3 h-48 w-48 rounded-full bg-bslc-green/10 blur-3xl" style="animation-delay: 2s;"></div>
+        <div class="animate-blob-slow absolute right-1/4 top-1/2 h-36 w-36 -translate-y-1/2 rounded-full bg-bslc-cream/40 blur-2xl" style="animation-delay: 4s;"></div>
       </div>
       <div class="relative z-10 mx-auto flex max-w-6xl flex-col items-center gap-8 px-4 pb-10 pt-8 md:gap-10 md:pb-12 md:pt-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:px-6 lg:pb-16 lg:pt-14">
       <div class="title-right-home w-full max-w-xl space-y-6 md:space-y-8 lg:max-w-none lg:flex-1">
@@ -59,14 +59,14 @@ function formatDate(value) {
             class="title-2 text-base leading-relaxed text-bslc-muted md:text-lg lg:text-xl"
           >
             Let's enhance your knowledge with
-            <span class="title-green font-bold text-bslc-green">E-Learning BSLC</span>!
+            <span class="title-green font-extrabold text-transparent bg-clip-text bg-linear-to-r from-bslc-green to-emerald-500">E-Learning BSLC</span>!
           </p>
         </div>
 
-        <div class="title-linear w-full max-w-lg">
-          <div class="rounded-lg bg-linear-to-r from-bslc-green/80 via-bslc-green to-emerald-400 p-px shadow-sm">
+        <div class="title-linear w-full max-w-lg mt-2">
+          <div class="rounded-xl bg-linear-to-r from-bslc-green/60 via-bslc-green/80 to-emerald-400 p-[1.5px] shadow-lg shadow-bslc-green/10 transition-transform duration-300 hover:-translate-y-1">
             <div
-              class="container-linear flex divide-x divide-bslc-cream overflow-hidden rounded-[calc(var(--radius-lg)-1px)] bg-bslc-white"
+              class="container-linear flex divide-x divide-bslc-cream/30 overflow-hidden rounded-[calc(var(--radius-xl)-1.5px)] bg-bslc-white/95 backdrop-blur-sm"
             >
             <div
               class="linear-left flex flex-1 flex-col items-center justify-center py-3.5 md:py-4 lg:py-5"
@@ -119,7 +119,7 @@ function formatDate(value) {
           class="title-left flex w-full shrink-0 justify-center lg:w-auto lg:max-w-md lg:justify-end xl:max-w-lg"
         >
           <img
-            class="img-home h-auto w-full max-w-[280px] md:max-w-xs lg:max-w-none"
+            class="img-home animate-float h-auto w-full max-w-[280px] md:max-w-xs lg:max-w-none drop-shadow-xl py-8"
             src="/Image-Home.svg"
             alt=""
             width="467"
@@ -139,7 +139,7 @@ function formatDate(value) {
           </div>
           <RouterLink
             :to="{ name: 'module' }"
-            class="inline-flex w-fit items-center rounded-lg border border-bslc-green bg-bslc-green px-4 py-2 text-sm font-semibold text-bslc-white! transition hover:bg-bslc-green-dark hover:text-bslc-white! focus:text-bslc-white!"
+            class="inline-flex w-fit items-center rounded-xl bg-linear-to-r from-bslc-green to-emerald-600 px-5 py-2.5 text-sm font-semibold text-bslc-white! shadow-md shadow-bslc-green/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-bslc-green/30"
           >
             See more
           </RouterLink>
@@ -157,7 +157,7 @@ function formatDate(value) {
           <li
             v-for="mod in latestModules"
             :key="mod.id"
-            class="flex h-full flex-col rounded-xl border border-bslc-cream bg-linear-to-b from-bslc-cream/20 to-bslc-white p-4 shadow-sm"
+            class="group flex h-full flex-col rounded-2xl border border-bslc-cream/50 bg-white/60 p-5 backdrop-blur-md shadow-sm transition-all duration-300"
           >
             <p class="text-xs font-medium uppercase tracking-wide text-bslc-green">
               {{ mod.type ?? 'Module' }}{{ mod.year ? ` · ${mod.year}` : '' }}
@@ -181,7 +181,7 @@ function formatDate(value) {
                 :href="ensureExternalUrl(mod.link)"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="mt-auto inline-flex w-full justify-center rounded-lg border border-bslc-cream bg-linear-to-b from-bslc-cream/20 to-bslc-white px-3 py-2 pt-3 text-sm font-semibold text-bslc-green underline-offset-2 hover:underline"
+                class="mt-auto inline-flex w-full justify-center rounded-xl border border-bslc-cream bg-bslc-white px-4 py-2.5 text-sm font-semibold text-bslc-green transition-all duration-200 hover:bg-bslc-green hover:text-bslc-white!"
               >
                 Buka Modul
               </a>
@@ -191,7 +191,7 @@ function formatDate(value) {
     </section>
 
     <!-- Latest videos -->
-    <section class="border-t border-bslc-cream/80 bg-linear-to-b from-bslc-cream/15 to-bslc-white py-12 md:py-14">
+    <section class="border-t border-bslc-cream/80 bg-slate-50/50 py-12 md:py-14">
       <div class="mx-auto max-w-6xl px-4 sm:px-6">
         <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
@@ -200,7 +200,7 @@ function formatDate(value) {
           </div>
           <RouterLink
             :to="{ name: 'video' }"
-            class="inline-flex w-fit items-center rounded-lg border border-bslc-green bg-bslc-green px-4 py-2 text-sm font-semibold text-bslc-white! transition hover:bg-bslc-green-dark hover:text-bslc-white! focus:text-bslc-white!"
+            class="inline-flex w-fit items-center rounded-xl bg-linear-to-r from-bslc-green to-emerald-600 px-5 py-2.5 text-sm font-semibold text-bslc-white! shadow-md shadow-bslc-green/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-bslc-green/30"
           >
             See more
           </RouterLink>
@@ -218,7 +218,7 @@ function formatDate(value) {
           <li
             v-for="vid in latestVideos"
             :key="vid.id"
-            class="flex h-full flex-col rounded-xl border border-bslc-cream bg-bslc-white p-4 shadow-sm"
+            class="group flex h-full flex-col rounded-2xl border border-bslc-cream/50 bg-white/60 p-5 backdrop-blur-md shadow-sm transition-all duration-300"
           >
           <div class="flex items-center justify-between gap-2 text-xs font-medium text-bslc-muted">
             <p class="truncate">{{ vid.contributor?.name ?? 'Kontributor' }}</p>
@@ -237,7 +237,7 @@ function formatDate(value) {
               :href="ensureExternalUrl(vid.link)"
               target="_blank"
               rel="noopener noreferrer"
-              class="mt-auto inline-flex w-full justify-center rounded-lg border border-bslc-cream bg-linear-to-b from-bslc-cream/20 to-bslc-white px-3 py-2 pt-3 text-sm font-semibold text-bslc-green underline-offset-2 hover:underline"
+              class="mt-auto inline-flex w-full justify-center rounded-xl border border-bslc-cream bg-bslc-white px-4 py-2.5 text-sm font-semibold text-bslc-green transition-all duration-200 hover:bg-bslc-green hover:text-bslc-white!"
             >
               Tonton Video
             </a>
@@ -247,10 +247,10 @@ function formatDate(value) {
     </section>
 
     <!-- Contribution CTA -->
-    <section class="border-t border-bslc-cream/80 bg-bslc-white py-12 md:py-14">
+    <section class="border-t border-bslc-cream/80 bg-bslc-white py-14 md:py-18">
       <div class="mx-auto max-w-6xl px-4 sm:px-6">
         <div
-          class="rounded-2xl border border-bslc-cream bg-linear-to-r from-bslc-cream/20 via-bslc-white to-bslc-cream/10 p-6 shadow-sm md:p-8"
+          class="rounded-2xl border border-bslc-cream bg-linear-to-r from-bslc-cream/20 via-bslc-white to-bslc-cream/10 px-8 shadow-sm md:px-10 py-12"
         >
           <div class="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
             <div class="max-w-2xl">
@@ -264,7 +264,7 @@ function formatDate(value) {
             </div>
             <RouterLink
               to="/form"
-              class="inline-flex w-fit items-center justify-center rounded-lg border border-bslc-green bg-bslc-green px-5 py-2.5 text-sm font-semibold text-bslc-white! transition hover:bg-bslc-green-dark hover:text-bslc-white! focus:text-bslc-white!"
+              class="inline-flex w-fit items-center justify-center rounded-xl bg-linear-to-r from-bslc-green to-emerald-600 px-6 py-3 text-sm font-semibold text-bslc-white! shadow-md shadow-bslc-green/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-bslc-green/30"
             >
               Isi Form Kontribusi
             </RouterLink>
@@ -284,7 +284,7 @@ function formatDate(value) {
         </div>
 
         <div class="grid gap-4 md:grid-cols-2">
-          <article class="rounded-xl border border-bslc-cream bg-bslc-white p-5 shadow-sm">
+          <article class="group rounded-2xl border border-bslc-cream/60 bg-white/70 p-6 backdrop-blur-sm shadow-sm transition-all duration-300">
             <h3 class="text-base font-semibold text-bslc-ink">
               Apa itu E-Learning BSLC?
             </h3>
@@ -294,7 +294,7 @@ function formatDate(value) {
             </p>
           </article>
 
-          <article class="rounded-xl border border-bslc-cream bg-bslc-white p-5 shadow-sm">
+          <article class="group rounded-2xl border border-bslc-cream/60 bg-white/70 p-6 backdrop-blur-sm shadow-sm transition-all duration-300">
             <h3 class="text-base font-semibold text-bslc-ink">
               Siapa saja yang bisa mengakses kontennya?
             </h3>
@@ -304,7 +304,7 @@ function formatDate(value) {
             </p>
           </article>
 
-          <article class="rounded-xl border border-bslc-cream bg-bslc-white p-5 shadow-sm">
+          <article class="group rounded-2xl border border-bslc-cream/60 bg-white/70 p-6 backdrop-blur-sm shadow-sm transition-all duration-300">
             <h3 class="text-base font-semibold text-bslc-ink">
               Konten apa saja yang tersedia?
             </h3>
@@ -314,7 +314,7 @@ function formatDate(value) {
             </p>
           </article>
 
-          <article class="rounded-xl border border-bslc-cream bg-bslc-white p-5 shadow-sm">
+          <article class="group rounded-2xl border border-bslc-cream/60 bg-white/70 p-6 backdrop-blur-sm shadow-sm transition-all duration-300">
             <h3 class="text-base font-semibold text-bslc-ink">
               Bagaimana cara ikut berkontribusi?
             </h3>
@@ -329,11 +329,11 @@ function formatDate(value) {
 
 
     <!-- Vision -->
-    <section class="relative overflow-hidden border-t border-bslc-cream/80 bg-bslc-white py-20 md:py-24">
+    <section class="relative overflow-hidden border-t border-bslc-cream/80 bg-bslc-white py-24 md:py-32">
       <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div class="absolute -left-20 top-10 h-56 w-56 rounded-full bg-bslc-green/10 blur-3xl"></div>
-        <div class="absolute -right-16 bottom-6 h-64 w-64 rounded-full bg-bslc-cream blur-3xl"></div>
-        <div class="absolute left-1/2 top-1/3 h-40 w-40 -translate-x-1/2 rounded-full bg-bslc-green/8 blur-2xl"></div>
+        <div class="animate-blob absolute -left-20 top-10 h-56 w-56 rounded-full bg-bslc-green/15 blur-3xl"></div>
+        <div class="animate-blob-slow absolute -right-16 bottom-6 h-64 w-64 rounded-full bg-bslc-cream/80 blur-3xl" style="animation-delay: 2s;"></div>
+        <div class="animate-blob absolute left-1/2 top-1/3 h-40 w-40 -translate-x-1/2 rounded-full bg-bslc-green/10 blur-2xl" style="animation-delay: 4s;"></div>
       </div>
       <div class="relative mx-auto max-w-5xl px-4 text-center sm:px-6">
         <p class="text-sm font-semibold uppercase tracking-[0.2em] text-bslc-green">Our Vision</p>
@@ -347,7 +347,7 @@ function formatDate(value) {
             href="https://bslc.or.id"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center justify-center rounded-lg border border-bslc-green bg-bslc-green px-6 py-2.5 text-sm font-semibold text-bslc-white! transition hover:bg-bslc-green-dark hover:text-bslc-white! focus:text-bslc-white!"
+            class="inline-flex items-center justify-center rounded-xl bg-linear-to-r from-bslc-green to-emerald-600 px-8 py-3 text-sm font-semibold text-bslc-white! shadow-md shadow-bslc-green/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-bslc-green/30"
           >
             Visit our main website
           </a>

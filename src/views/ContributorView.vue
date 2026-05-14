@@ -42,6 +42,7 @@ const paginationItems = computed(() => {
 function goToPage(page) {
   if (page < 1 || page > totalPages.value || page === currentPage.value) return
   currentPage.value = page
+  loadContributors()
 }
 
 function getInitials(name) {
@@ -89,10 +90,6 @@ onMounted(async () => {
   await loadContributors()
 })
 
-watch(currentPage, async (newPage, oldPage) => {
-  if (newPage === oldPage) return
-  await loadContributors()
-})
 </script>
 
 <template>
@@ -109,46 +106,51 @@ watch(currentPage, async (newPage, oldPage) => {
     </p>
 
     <ul v-else class="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4">
-      <li v-for="item in contributors" :key="item.id" class="relative flex flex-col gap-2.5 rounded-xl border border-bslc-cream bg-white p-3">
+      <li v-for="item in contributors" :key="item.id" class="group relative flex flex-col overflow-hidden rounded-2xl border border-bslc-cream/50 bg-white/60 backdrop-blur-md shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-bslc-green/10">
+        
+        <!-- Cover Background (Abstract Gradient) -->
+        <div class="absolute inset-x-0 top-0 h-14 bg-linear-to-r from-bslc-green/10 via-emerald-400/10 to-bslc-cream/10 transition-opacity duration-300 group-hover:opacity-80"></div>
+
         <span
           v-if="getBatchBadge(item.nim)"
-          class="absolute left-2 top-2 rounded-full border border-bslc-green/20 bg-bslc-green/10 px-2 py-0.5 text-[10px] font-semibold tracking-wide text-bslc-green"
+          class="absolute left-3 top-3 z-10 rounded-full border border-white/40 bg-white/70 backdrop-blur-sm px-2 py-0.5 text-[10px] font-bold tracking-wide text-bslc-green shadow-xs"
         >
           {{ getBatchBadge(item.nim) }}
         </span>
         
         <!-- Top: avatar + info centered -->
-        <div class="flex flex-col items-center gap-2 text-center">
-          <div class="h-11 w-11 shrink-0 overflow-hidden rounded-full border border-slate-200 bg-slate-100">
+        <div class="relative z-10 mt-5 flex flex-col items-center gap-2 px-4 text-center">
+          <div class="h-16 w-16 shrink-0 overflow-hidden rounded-full border-4 border-white bg-slate-100 shadow-sm transition-transform duration-300 group-hover:scale-110 group-hover:border-bslc-cream/50">
             <img v-if="item.image_path" :src="formatImagePath(item.image_path)" :alt="item.name" class="h-full w-full object-cover" />
-            <div v-else class="flex h-full w-full items-center justify-center text-xs font-medium text-bslc-green">
+            <div v-else class="flex h-full w-full items-center justify-center bg-bslc-green/10 text-sm font-bold text-bslc-green">
               {{ getInitials(item.name) }}
             </div>
           </div>
-          <div class="w-full min-w-0">
-            <p class="truncate text-[13px] font-medium text-bslc-ink">{{ item.name }}</p>
-            <p class="truncate text-[11px] text-bslc-muted">{{ item.major || '-' }}</p>
-            <p class="truncate text-[10px] text-slate-400">{{ item.region || '-' }}</p>
+          <div class="w-full min-w-0 mt-1">
+            <p class="truncate text-sm font-bold text-bslc-ink transition-colors group-hover:text-bslc-green">{{ item.name }}</p>
+            <p class="truncate text-[11px] font-medium text-bslc-muted">{{ item.major || '-' }}</p>
+            <p class="truncate text-[10px] text-slate-400 mt-0.5">{{ item.region || '-' }}</p>
           </div>
         </div>
 
         <!-- Footer: stats + badge -->
-        <div class="flex items-center justify-between border-t border-slate-100 pt-2">
-          <div class="flex gap-2.5">
+        <div class="mt-4 flex items-center justify-between border-t border-slate-100/60 bg-white/40 px-5 py-3">
+          <div class="flex gap-4">
             <div class="flex flex-col items-center">
-              <span class="text-[13px] font-medium text-bslc-ink">{{ item.videos_count ?? 0 }}</span>
-              <span class="text-[10px] text-slate-400">Video</span>
+              <span class="text-sm font-bold text-bslc-ink">{{ item.videos_count ?? 0 }}</span>
+              <span class="text-[9px] font-semibold uppercase tracking-wider text-slate-400">Video</span>
             </div>
             <div class="flex flex-col items-center">
-              <span class="text-[13px] font-medium text-bslc-ink">{{ item.forum_posts_count ?? 0 }}</span>
-              <span class="text-[10px] text-slate-400">Forum</span>
+              <span class="text-sm font-bold text-bslc-ink">{{ item.forum_posts_count ?? 0 }}</span>
+              <span class="text-[9px] font-semibold uppercase tracking-wider text-slate-400">Forum</span>
             </div>
           </div>
-          <span class="rounded-full bg-bslc-green/10 px-2.5 py-0.5 text-xs font-medium text-bslc-green">
-            {{ item.total_contributions ?? 0 }}
-          </span>
+          <div class="flex flex-col items-end">
+             <span class="rounded-lg bg-bslc-green px-3 py-1 text-xs font-bold text-white shadow-sm shadow-bslc-green/20">
+               {{ item.total_contributions ?? 0 }}
+             </span>
+          </div>
         </div>
-
       </li>
     </ul>
 

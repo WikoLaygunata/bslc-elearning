@@ -48,7 +48,7 @@ const socialLinks = [
 
 <template>
   <div class="flex min-h-screen flex-col bg-bslc-white text-bslc-ink antialiased">
-    <header class="sticky top-0 z-20 bg-white shadow-[0_1px_0_rgba(0,0,0,0.06)]">
+    <header class="sticky top-0 z-50 border-b border-bslc-cream/30 bg-white/85 backdrop-blur-lg shadow-sm shadow-bslc-green/5 transition-all duration-300">
       <div class="container-navbar mx-auto max-w-6xl px-4 sm:px-6">
         <!-- Mobile & tablet: satu baris brand (tanpa duplikat E-LEARNING) -->
         <div
@@ -103,8 +103,8 @@ const socialLinks = [
               v-for="item in links"
               :key="item.to"
               :to="item.to"
-              class="rounded px-2 py-1.5 text-xs font-medium text-bslc-muted transition hover:bg-bslc-cream/40 hover:text-bslc-ink lg:px-2.5 lg:text-sm"
-              active-class="bg-bslc-green/10 font-semibold text-bslc-green"
+              class="rounded-lg px-3 py-2 text-xs font-medium text-bslc-muted transition-all hover:bg-bslc-green/5 hover:text-bslc-green lg:px-4 lg:text-sm"
+              active-class="bg-bslc-green/10 font-bold text-bslc-green shadow-xs"
             >
               {{ item.label }}
             </RouterLink>
@@ -120,8 +120,8 @@ const socialLinks = [
             v-for="item in links"
             :key="item.to"
             :to="item.to"
-            class="rounded px-2 py-1.5 text-[11px] font-medium text-bslc-muted transition hover:bg-bslc-cream/40 hover:text-bslc-ink sm:px-2.5 sm:text-sm"
-            active-class="bg-bslc-green/10 font-semibold text-bslc-green"
+            class="rounded-lg px-2.5 py-2 text-[11px] font-medium text-bslc-muted transition-all hover:bg-bslc-green/5 hover:text-bslc-green sm:px-3 sm:text-sm"
+            active-class="bg-bslc-green/10 font-bold text-bslc-green shadow-xs"
           >
             {{ item.label }}
           </RouterLink>

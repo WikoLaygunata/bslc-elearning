@@ -109,6 +109,7 @@ async function loadPosts() {
 function goToPage(page) {
   if (page < 1 || page > totalPages.value || page === currentPage.value) return
   currentPage.value = page
+  loadPosts()
 }
 
 async function applyFilters() {
@@ -122,16 +123,11 @@ onMounted(async () => {
 })
 
 watch(search, () => {
-  currentPage.value = 1
   if (searchDebounceTimer) clearTimeout(searchDebounceTimer)
   searchDebounceTimer = setTimeout(() => {
+    currentPage.value = 1
     loadPosts()
   }, SEARCH_DEBOUNCE_MS)
-})
-
-watch(currentPage, async (newPage, oldPage) => {
-  if (newPage === oldPage) return
-  await loadPosts()
 })
 
 onBeforeUnmount(() => {
@@ -149,29 +145,31 @@ onBeforeUnmount(() => {
         </span> untuk berkontribusi</p>
     </div>
 
-    <div class="mb-5 rounded-xl border border-slate-200 bg-white p-3 shadow-sm sm:p-4">
-      <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
-        <select
-          v-model="selectedFaculty"
-          class="w-full cursor-pointer rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-2 text-xs text-slate-700 outline-none transition-all focus:border-[#19A89D] focus:ring-2 focus:ring-[#19A89D] sm:w-auto sm:min-w-44"
-        >
-          <option value="">Semua Fakultas...</option>
-          <option v-for="f in faculties" :key="f.id" :value="String(f.id)">
-            {{ f.name }}
-          </option>
-        </select>
-        <select
-          v-model="selectedSemester"
-          class="w-full cursor-pointer rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-2 text-xs text-slate-700 outline-none transition-all focus:border-[#19A89D] focus:ring-2 focus:ring-[#19A89D] sm:w-auto sm:min-w-36"
-        >
-          <option value="">Semua Semester...</option>
-          <option v-for="semester in semesterOptions" :key="semester" :value="String(semester)">
-            Semester {{ semester }}
-          </option>
-        </select>
+    <div class="mb-5 rounded-2xl border border-bslc-cream/60 bg-white/70 p-4 backdrop-blur-sm shadow-sm sm:p-5">
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center w-full sm:w-auto">
+          <select
+            v-model="selectedFaculty"
+            class="w-full cursor-pointer rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-2 text-xs text-slate-700 outline-none transition-all focus:border-[#19A89D] focus:ring-2 focus:ring-[#19A89D] sm:w-auto sm:min-w-44"
+          >
+            <option value="">Semua Fakultas...</option>
+            <option v-for="f in faculties" :key="f.id" :value="String(f.id)">
+              {{ f.name }}
+            </option>
+          </select>
+          <select
+            v-model="selectedSemester"
+            class="w-full cursor-pointer rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-2 text-xs text-slate-700 outline-none transition-all focus:border-[#19A89D] focus:ring-2 focus:ring-[#19A89D] sm:w-auto sm:min-w-36"
+          >
+            <option value="">Semua Semester...</option>
+            <option v-for="semester in semesterOptions" :key="semester" :value="String(semester)">
+              Semester {{ semester }}
+            </option>
+          </select>
+        </div>
         <button
           type="button"
-          class="w-full rounded-lg bg-bslc-green px-8 py-2 text-xs font-semibold text-bslc-white transition hover:bg-bslc-green-dark disabled:opacity-50 sm:w-auto"
+          class="w-full rounded-xl bg-linear-to-r from-bslc-green to-emerald-600 px-8 py-2 text-sm font-semibold text-bslc-white! shadow-md shadow-bslc-green/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-bslc-green/30 disabled:opacity-50 disabled:hover:translate-y-0 disabled:hover:shadow-md sm:w-auto shrink-0"
           :disabled="loading"
           @click="applyFilters"
         >
@@ -198,7 +196,7 @@ onBeforeUnmount(() => {
       <article
         v-for="post in posts"
         :key="post.id"
-        class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+        class="group rounded-2xl border border-bslc-cream/50 bg-white/60 p-6 backdrop-blur-md shadow-sm transition-all duration-300"
       >
         <div class="mb-4 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
           <div class="flex min-w-0 items-start gap-3">
@@ -242,7 +240,7 @@ onBeforeUnmount(() => {
         <p v-if="post.description" class="mt-2 whitespace-pre-line text-sm leading-relaxed text-slate-700">
           {{ post.description }}
         </p>
-          <a v-if="post.link" :href="ensureExternalUrl(post.link)" :title="post.link" target="_blank" rel="noopener noreferrer" class="mt-2 inline-flex text-sm font-semibold text-bslc-green underline-offset-2 hover:underline px-3 py-2 border border-bslc-cream rounded-lg bg-linear-to-b from-bslc-cream/20 to-bslc-white">
+          <a v-if="post.link" :href="ensureExternalUrl(post.link)" :title="post.link" target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center justify-center rounded-xl bg-bslc-white px-5 py-2.5 text-sm font-semibold text-bslc-green border border-bslc-cream transition-all duration-200 hover:bg-bslc-green hover:text-bslc-white!">
             Buka Link
           </a>
       </article>

@@ -118,6 +118,7 @@ async function loadModules() {
 function goToPage(page) {
   if (page < 1 || page > totalPages.value || page === currentPage.value) return
   currentPage.value = page
+  loadModules()
 }
 
 function applyCurriculumSearch() {
@@ -164,17 +165,12 @@ watch(selectedCourse, async () => {
   filterError.value = ''
 })
 
-watch(search, async () => {
-  currentPage.value = 1
+watch(search, () => {
   if (searchDebounceTimer) clearTimeout(searchDebounceTimer)
   searchDebounceTimer = setTimeout(() => {
+    currentPage.value = 1
     loadModules()
   }, SEARCH_DEBOUNCE_MS)
-})
-
-watch(currentPage, async (newPage, oldPage) => {
-  if (newPage === oldPage) return
-  await loadModules()
 })
 
 onBeforeUnmount(() => {
@@ -189,7 +185,7 @@ onBeforeUnmount(() => {
       <p class="mt-1 text-sm text-bslc-muted">Modul pembelajaran dari tim BSLC</p>
     </div>
 
-    <div class="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div class="mb-8 rounded-2xl border border-bslc-cream/60 bg-white/70 p-6 backdrop-blur-sm shadow-sm">
       <div class="mb-4 flex items-center gap-2">
         <h2 class="text-lg font-semibold text-slate-800">Cari Modul Berdasarkan Mata Kuliah</h2>
       </div>
@@ -247,7 +243,7 @@ onBeforeUnmount(() => {
       <div class="mt-4 flex justify-end">
         <button
           type="button"
-          class="rounded-lg bg-bslc-green px-4 py-2 text-sm font-semibold text-bslc-white transition hover:bg-bslc-green-dark"
+          class="rounded-xl bg-linear-to-r from-bslc-green to-emerald-600 px-6 py-2.5 text-sm font-semibold text-bslc-white! shadow-md shadow-bslc-green/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-bslc-green/30 disabled:opacity-50 disabled:hover:translate-y-0 disabled:hover:shadow-md"
           :disabled="loadingModules"
           @click="applyCurriculumSearch"
         >
@@ -277,7 +273,7 @@ onBeforeUnmount(() => {
         <li
           v-for="mod in displayedModules"
           :key="mod.id"
-          class="flex h-full flex-col rounded-xl border border-bslc-cream bg-linear-to-b from-bslc-cream/20 to-bslc-white p-4"
+          class="group flex h-full flex-col rounded-2xl border border-bslc-cream/50 bg-white/60 p-5 backdrop-blur-md shadow-sm transition-all duration-300"
         >
           <p class="text-xs font-medium uppercase tracking-wide text-bslc-green">
             {{ mod.type ?? 'Module' }}{{ mod.year ? ` · ${mod.year}` : '' }}
@@ -297,7 +293,7 @@ onBeforeUnmount(() => {
             :href="ensureExternalUrl(mod.link)"
             target="_blank"
             rel="noopener noreferrer"
-            class="mt-auto inline-flex w-full justify-center rounded-lg border border-bslc-cream bg-linear-to-b from-bslc-cream/20 to-bslc-white px-3 py-2 pt-3 text-sm font-semibold text-bslc-green underline-offset-2 hover:underline"
+            class="mt-auto inline-flex w-full justify-center rounded-xl border border-bslc-cream bg-bslc-white px-4 py-2.5 text-sm font-semibold text-bslc-green transition-all duration-200 hover:bg-bslc-green hover:text-bslc-white!"
           >
             Buka Modul
           </a>

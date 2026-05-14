@@ -92,6 +92,7 @@ async function loadVideos() {
 function goToPage(page) {
   if (page < 1 || page > totalPages.value || page === currentPage.value) return
   currentPage.value = page
+  loadVideos()
 }
 
 async function applyFilters() {
@@ -105,16 +106,11 @@ onMounted(async () => {
 })
 
 watch(search, () => {
-  currentPage.value = 1
   if (searchDebounceTimer) clearTimeout(searchDebounceTimer)
   searchDebounceTimer = setTimeout(() => {
+    currentPage.value = 1
     loadVideos()
   }, SEARCH_DEBOUNCE_MS)
-})
-
-watch(currentPage, async (newPage, oldPage) => {
-  if (newPage === oldPage) return
-  await loadVideos()
 })
 
 onBeforeUnmount(() => {
@@ -129,29 +125,31 @@ onBeforeUnmount(() => {
       <p class="mt-1 text-sm text-bslc-muted">Video pembelajaran dari tim BSLC dan volunteer</p>
     </div>
 
-    <div class="mb-5 rounded-xl border border-slate-200 bg-white p-3 shadow-sm sm:p-4">
-      <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
-        <select
-          v-model="selectedFaculty"
-          class="w-full cursor-pointer rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-2 text-xs text-slate-700 outline-none transition-all focus:border-[#19A89D] focus:ring-2 focus:ring-[#19A89D] sm:w-auto sm:min-w-44"
-        >
-          <option value="">Semua Fakultas...</option>
-          <option v-for="f in faculties" :key="f.id" :value="String(f.id)">
-            {{ f.name }}
-          </option>
-        </select>
-        <select
-          v-model="selectedSemester"
-          class="w-full cursor-pointer rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-2 text-xs text-slate-700 outline-none transition-all focus:border-[#19A89D] focus:ring-2 focus:ring-[#19A89D] sm:w-auto sm:min-w-36"
-        >
-          <option value="">Semua Semester...</option>
-          <option v-for="semester in semesterOptions" :key="semester" :value="String(semester)">
-            Semester {{ semester }}
-          </option>
-        </select>
+    <div class="mb-5 rounded-2xl border border-bslc-cream/60 bg-white/70 p-4 backdrop-blur-sm shadow-sm sm:p-5">
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center w-full sm:w-auto">
+          <select
+            v-model="selectedFaculty"
+            class="w-full cursor-pointer rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-2 text-xs text-slate-700 outline-none transition-all focus:border-[#19A89D] focus:ring-2 focus:ring-[#19A89D] sm:w-auto sm:min-w-44"
+          >
+            <option value="">Semua Fakultas...</option>
+            <option v-for="f in faculties" :key="f.id" :value="String(f.id)">
+              {{ f.name }}
+            </option>
+          </select>
+          <select
+            v-model="selectedSemester"
+            class="w-full cursor-pointer rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-2 text-xs text-slate-700 outline-none transition-all focus:border-[#19A89D] focus:ring-2 focus:ring-[#19A89D] sm:w-auto sm:min-w-36"
+          >
+            <option value="">Semua Semester...</option>
+            <option v-for="semester in semesterOptions" :key="semester" :value="String(semester)">
+              Semester {{ semester }}
+            </option>
+          </select>
+        </div>
         <button
           type="button"
-          class="w-full rounded-lg bg-bslc-green px-8 py-2 text-xs font-semibold text-bslc-white transition hover:bg-bslc-green-dark disabled:opacity-50 sm:w-auto"
+          class="w-full rounded-xl bg-linear-to-r from-bslc-green to-emerald-600 px-8 py-2 text-sm font-semibold text-bslc-white! shadow-md shadow-bslc-green/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-bslc-green/30 disabled:opacity-50 disabled:hover:translate-y-0 disabled:hover:shadow-md sm:w-auto shrink-0"
           :disabled="loading"
           @click="applyFilters"
         >
@@ -177,7 +175,7 @@ onBeforeUnmount(() => {
         <li
           v-for="vid in videos"
           :key="vid.id"
-          class="flex h-full flex-col rounded-xl border border-bslc-cream bg-bslc-white p-4"
+          class="group flex h-full flex-col rounded-2xl border border-bslc-cream/50 bg-white/60 p-5 backdrop-blur-md shadow-sm transition-all duration-300"
         >
         <div class="flex items-center justify-between gap-2 text-xs font-medium text-bslc-muted">
           <p class="truncate">{{ vid.contributor?.name ?? 'Kontributor' }}</p>
@@ -210,9 +208,9 @@ onBeforeUnmount(() => {
             :href="ensureExternalUrl(vid.link)"
             target="_blank"
             rel="noopener noreferrer"
-            class="mt-auto inline-flex w-full justify-center rounded-lg border border-bslc-cream bg-linear-to-b from-bslc-cream/20 to-bslc-white px-3 py-2 pt-3 text-sm font-semibold text-bslc-green underline-offset-2 hover:underline"
+            class="mt-auto inline-flex w-full justify-center rounded-xl border border-bslc-cream bg-bslc-white px-4 py-2.5 text-sm font-semibold text-bslc-green transition-all duration-200 hover:bg-bslc-green hover:text-bslc-white!"
           >
-            Tonton video
+            Tonton Video
           </a>
         </li>
       </ul>
