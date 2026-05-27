@@ -3,7 +3,7 @@ import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { getFaculties, getLatestVideos } from '@/api/api'
 import { ensureExternalUrl } from '@/utils/url'
 
-const PAGE_SIZE = 10
+const PAGE_SIZE = 12
 const SEARCH_DEBOUNCE_MS = 400
 
 const videos = ref([])

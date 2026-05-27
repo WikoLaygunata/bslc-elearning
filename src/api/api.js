@@ -39,19 +39,24 @@ function parseList(data) {
  * Laravel paginator or { data: { data, current_page, ... } } from respond().
  */
 function parsePaginated(body) {
-  const root = body.data ?? body
+  const root = (body && body.data && !Array.isArray(body.data)) ? body.data : body
   let items = []
-  if (Array.isArray(root.data)) items = root.data
-  else if (Array.isArray(root)) items = root
+  if (root) {
+    if (Array.isArray(root.data)) {
+      items = root.data
+    } else if (Array.isArray(root)) {
+      items = root
+    }
+  }
   return {
     items,
     meta: {
-      currentPage: root.current_page ?? 1,
-      pageSize: root.per_page ?? items.length,
-      total: root.total ?? items.length,
-      lastPage: root.last_page ?? 1,
-      from: root.from ?? null,
-      to: root.to ?? null,
+      currentPage: root?.current_page ?? 1,
+      pageSize: root?.per_page ?? items.length,
+      total: root?.total ?? items.length,
+      lastPage: root?.last_page ?? 1,
+      from: root?.from ?? null,
+      to: root?.to ?? null,
     },
     raw: body,
   }
