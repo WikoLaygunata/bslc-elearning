@@ -1,11 +1,14 @@
 <script setup>
+import { ref } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
+
+const isMenuOpen = ref(false)
 
 const links = [
   { to: '/', label: 'Home' },
   { to: '/module', label: 'Module' },
   { to: '/video', label: 'Video' },
-  { to: '/forum', label: 'Forum' },
+  { to: '/post', label: 'Post' },
   { to: '/contributor', label: 'Contributor' },
 ]
 
@@ -50,24 +53,52 @@ const socialLinks = [
   <div class="flex min-h-screen flex-col bg-bslc-white text-bslc-ink antialiased">
     <header class="sticky top-0 z-50 border-b border-bslc-cream/30 bg-white/85 backdrop-blur-lg shadow-sm shadow-bslc-green/5 transition-all duration-300">
       <div class="container-navbar mx-auto max-w-6xl px-4 sm:px-6">
-        <!-- Mobile & tablet: satu baris brand (tanpa duplikat E-LEARNING) -->
+        <!-- Mobile & tablet: logo + brand name left, hamburger right -->
         <div
           class="title-left-navbar flex min-h-13 w-full items-center justify-between gap-3 py-3 min-[900px]:hidden"
         >
-          <RouterLink
-            to="/"
-            class="elearning-left shrink-0 text-base font-bold tracking-wide text-bslc-green transition hover:text-bslc-green-dark sm:text-lg"
+          <div class="flex items-center gap-2">
+            <a
+              href="https://new.bslc.or.id/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="shrink-0"
+            >
+              <img src="/Logo-bslc-mobile-navbar.svg" alt="BSLC" class="h-8 w-auto sm:h-9" />
+            </a>
+            <RouterLink
+              to="/"
+              class="elearning-left shrink-0 text-base font-bold tracking-wide text-bslc-green transition hover:text-bslc-green-dark sm:text-lg"
+            >
+              E-LEARNING
+            </RouterLink>
+          </div>
+          <button
+            @click="isMenuOpen = !isMenuOpen"
+            class="flex h-9 w-9 items-center justify-center rounded-lg text-bslc-muted transition hover:bg-bslc-green/5 hover:text-bslc-green focus:outline-hidden"
+            aria-label="Toggle menu"
           >
-            E-LEARNING
-          </RouterLink>
-          <a
-            href="https://new.bslc.or.id/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="shrink-0"
-          >
-            <img src="/Logo-bslc-mobile-navbar.svg" alt="BSLC" class="h-8 w-auto sm:h-9" />
-          </a>
+            <svg
+              v-if="!isMenuOpen"
+              class="h-6 w-6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg
+              v-else
+              class="h-6 w-6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
         </div>
 
         <!-- Desktop lebar: brand kiri + nav kanan -->
@@ -111,21 +142,25 @@ const socialLinks = [
           </nav>
         </div>
 
-        <!-- Nav baris kedua: mobile / tablet saja -->
-        <nav
-          class="flex flex-wrap items-center justify-center gap-x-0.5 gap-y-1 border-t border-bslc-cream/60 px-0 py-2.5 min-[900px]:hidden sm:justify-end sm:gap-1"
-          aria-label="Main"
-        >
-          <RouterLink
-            v-for="item in links"
-            :key="item.to"
-            :to="item.to"
-            class="rounded-lg px-2.5 py-2 text-[11px] font-medium text-bslc-muted transition-all hover:bg-bslc-green/5 hover:text-bslc-green sm:px-3 sm:text-sm"
-            active-class="bg-bslc-green/10 font-bold text-bslc-green shadow-xs"
+        <!-- Nav baris kedua: mobile / tablet saja (collapsible menu) -->
+        <transition name="slide-fade">
+          <nav
+            v-show="isMenuOpen"
+            class="absolute left-0 right-0 top-full flex flex-col gap-1 border-b border-bslc-cream/30 bg-white/95 backdrop-blur-lg px-6 py-4 shadow-lg shadow-bslc-green/5 min-[900px]:hidden"
+            aria-label="Main Mobile"
           >
-            {{ item.label }}
-          </RouterLink>
-        </nav>
+            <RouterLink
+              v-for="item in links"
+              :key="item.to"
+              :to="item.to"
+              @click="isMenuOpen = false"
+              class="rounded-lg px-4 py-2.5 text-sm font-medium text-bslc-muted transition-all hover:bg-bslc-green/5 hover:text-bslc-green"
+              active-class="bg-bslc-green/10 font-bold text-bslc-green shadow-xs"
+            >
+              {{ item.label }}
+            </RouterLink>
+          </nav>
+        </transition>
       </div>
     </header>
 
@@ -154,7 +189,7 @@ const socialLinks = [
               to="/form"
               class="inline-flex items-center rounded-lg border border-white/35 bg-white/10 px-3 py-2 text-xs font-semibold text-white transition hover:bg-white/20 sm:text-sm"
             >
-              Ikut Berkontribusi Postingan Forum/Video
+              Ikut Berkontribusi Post/Video
             </RouterLink>
             <div class="text">
               <p class="text-center text-sm font-medium text-white/95 min-[640px]:text-right">Contact us on</p>

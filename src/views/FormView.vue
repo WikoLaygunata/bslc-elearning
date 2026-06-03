@@ -59,7 +59,7 @@ const handleSubmit = async () => {
       <div class="mb-8">
         <h1 class="text-3xl font-bold tracking-tight text-bslc-ink md:text-4xl">Formulir Kontribusi</h1>
         <p class="mt-1 text-sm text-bslc-muted md:text-base">
-          Suaramu membantu kami menjadi lebih baik. Berikan feedback atau request postingan forum/video di bawah ini.
+          Suaramu membantu kami menjadi lebih baik. Berikan feedback atau request postingan post/video di bawah ini.
         </p>
       </div>
 
@@ -108,7 +108,7 @@ const handleSubmit = async () => {
             <div class="space-y-6">
               <h2 class="flex items-center border-b border-slate-200 pb-2 text-lg font-semibold text-bslc-ink">
                 <span class="mr-2 flex h-6 w-6 items-center justify-center rounded-full bg-bslc-green text-xs font-bold text-white">2</span>
-                Request Postingan Forum/Video
+                Request Postingan Post/Video
               </h2>
 
               <div class="space-y-1">
@@ -140,7 +140,7 @@ const handleSubmit = async () => {
               <div class="space-y-1">
                 <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500">Jenis Laporan</label>
                 <div class="flex gap-4 mt-2">
-                  <label v-for="item in ['Forum', 'Video', 'Saran']" :key="item" class="flex-1">
+                  <label v-for="item in ['Post', 'Video', 'Saran']" :key="item" class="flex-1">
                     <input type="radio" :value="item" v-model="formData.jenis" class="hidden peer" name="jenis" required>
                     <div class="cursor-pointer rounded-lg border border-slate-200 py-2 text-center text-sm text-slate-600 transition-all hover:bg-slate-50 peer-checked:border-bslc-green peer-checked:bg-bslc-green/10 peer-checked:font-semibold peer-checked:text-bslc-green">
                       {{ item }}

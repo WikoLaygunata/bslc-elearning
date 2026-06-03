@@ -4,8 +4,8 @@ const routes = [
   { path: '/', name: 'home', component: () => import('@/views/HomeView.vue') },
   { path: '/module', name: 'module', component: () => import('@/views/ModuleView.vue') },
   { path: '/video', name: 'video', component: () => import('@/views/VideoView.vue') },
+  { path: '/post', name: 'post', component: () => import('@/views/ForumView.vue') },
   { path: '/contributor', name: 'contributor', component: () => import('@/views/ContributorView.vue') },
-  { path: '/forum', name: 'forum', component: () => import('@/views/ForumView.vue') },
   { path: '/form', name: 'form', component: () => import('@/views/FormView.vue') },
   { path: '/:pathMatch(.*)*', name: 'not-found', component: () => import('@/views/NotFound.vue') },
 ]

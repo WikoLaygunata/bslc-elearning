@@ -160,7 +160,7 @@ onMounted(async () => {
             </div>
             <div class="flex flex-col items-center">
               <span class="text-sm font-bold text-bslc-ink">{{ item.forum_posts_count ?? 0 }}</span>
-              <span class="text-[9px] font-semibold uppercase tracking-wider text-slate-400">Forum</span>
+              <span class="text-[9px] font-semibold uppercase tracking-wider text-slate-400">Post</span>
             </div>
           </div>
           <div class="flex flex-col items-end">

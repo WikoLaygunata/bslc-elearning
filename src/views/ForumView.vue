@@ -99,7 +99,7 @@ async function loadPosts() {
     posts.value = res.items
     meta.value = res.meta
   } catch (error) {
-    errorMessage.value = 'Gagal memuat post forum.'
+    errorMessage.value = 'Gagal memuat postingan.'
     console.error(error)
   } finally {
     loading.value = false
@@ -138,8 +138,8 @@ onBeforeUnmount(() => {
 <template>
   <section class="mx-auto max-w-4xl px-4 py-10 sm:px-6">
     <div class="mb-6">
-      <h1 class="text-3xl font-bold tracking-tight text-bslc-ink md:text-4xl">Forum</h1>
-      <p class="mt-1 text-sm text-bslc-muted">Forum informasi mengenai pembelajaran, contact tim BSLC atau 
+      <h1 class="text-3xl font-bold tracking-tight text-bslc-ink md:text-4xl">Post</h1>
+      <p class="mt-1 text-sm text-bslc-muted">Post informasi mengenai pembelajaran, contact tim BSLC atau 
         <span class="text-bslc-green underline">
           <RouterLink to="/form" class="text-bslc-green underline">klik link ini</RouterLink>
         </span> untuk berkontribusi</p>
@@ -205,7 +205,7 @@ onBeforeUnmount(() => {
       </div>
     </div>
     <p v-else-if="errorMessage" class="text-sm text-red-700">{{ errorMessage }}</p>
-    <p v-else-if="posts.length === 0" class="text-sm text-bslc-muted">Belum ada post forum.</p>
+    <p v-else-if="posts.length === 0" class="text-sm text-bslc-muted">Belum ada postingan.</p>
 
     <div v-else class="space-y-4 mt-3">
       <article
