@@ -4,7 +4,7 @@ import { getFaculties, getLatestForumPosts } from '@/api/api'
 import { ensureExternalUrl } from '@/utils/url'
 
 const PAGE_SIZE = 10
-const SEARCH_DEBOUNCE_MS = 400
+const SEARCH_DEBOUNCE_MS = 700
 
 const posts = ref([])
 const faculties = ref([])

@@ -64,11 +64,12 @@ function parsePaginated(body) {
 
 /** Query string for ?search=&page=&pageSize= (used by videos, forum posts, course modules latest). */
 function paginationQuery(options = {}) {
-  const { search = '', facultyId = '', semester = '', page = 1, pageSize = 10 } = options
+  const { search = '', facultyId = '', semester = '', courseId = '', page = 1, pageSize = 10 } = options
   const params = new URLSearchParams()
   if (search) params.set('search', search)
   if (facultyId !== '' && facultyId != null) params.set('faculty_id', String(facultyId))
   if (semester !== '' && semester != null) params.set('semester', String(semester))
+  if (courseId !== '' && courseId != null) params.set('course_id', String(courseId))
   params.set('page', String(page))
   params.set('pageSize', String(pageSize))
   return params.toString()
@@ -114,17 +115,9 @@ export async function getCourses(majorId, search = '') {
   return parseList(data)
 }
 
-export async function getCourseModules(courseId) {
-  const params = new URLSearchParams()
-  if (courseId != null && courseId !== '') params.set('course_id', String(courseId))
-  const qs = params.toString()
-  const data = await fetchJson(`${BASE_URL}/course-modules${qs ? `?${qs}` : ''}`)
-  return parseList(data)
-}
-
 /**
- * GET /course-modules/latest — paginated; search by course name.
- * @param {{ search?: string, page?: number, pageSize?: number }} options
+ * GET /course-modules/latest — paginated; search by course name or filter by course ID.
+ * @param {{ search?: string, courseId?: string|number, page?: number, pageSize?: number }} options
  */
 export async function getLatestCourseModules(options = {}) {
   const qs = paginationQuery(options)

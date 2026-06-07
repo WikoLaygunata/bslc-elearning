@@ -20,7 +20,7 @@ const selectedCourse = ref('')
 
 const search = ref('')
 const currentPage = ref(1)
-const SEARCH_DEBOUNCE_MS = 400
+const SEARCH_DEBOUNCE_MS = 700
 let searchDebounceTimer = null
 
 const loadingFilters = ref(false)

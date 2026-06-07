@@ -4,7 +4,7 @@ import { getFaculties, getLatestVideos } from '@/api/api'
 import { ensureExternalUrl } from '@/utils/url'
 
 const PAGE_SIZE = 12
-const SEARCH_DEBOUNCE_MS = 400
+const SEARCH_DEBOUNCE_MS = 700
 
 const videos = ref([])
 const faculties = ref([])
